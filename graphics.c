@@ -53,7 +53,6 @@ void display_init() {
     gpio_put(DISPLAY_CS, false);
     sleep_us(2); // thSCSL, just in case
     display_clear();
-    display_refresh();
 }
 
 void display_set_pixel(uint x, uint y, bool enabled) {
@@ -78,7 +77,7 @@ bool display_get_pixel(uint x, uint y) {
 
 void display_clear() {
     for (int i = 0; i < BUF_SIZE; i++) {
-        buffer[i] &= 0b00000000;
+        buffer[i] |= 0xFF;
     }
     for (int row = 0; row < HEIGHT; row++) {
         changed[row] = true;
