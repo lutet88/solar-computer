@@ -18,4 +18,6 @@ pico_enable_stdio_uart(firmware 0)
 
 pico_add_extra_outputs(firmware)
 
-target_link_libraries(firmware pico_stdlib hardware_gpio hardware_uart hardware_spi)
+add_subdirectory(no-OS-FatFS-SD-SPI-RPi-Pico/FatFs_SPI build)
+
+target_link_libraries(firmware pico_stdlib hardware_gpio hardware_uart hardware_spi FatFs_SPI)

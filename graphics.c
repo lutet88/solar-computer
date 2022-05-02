@@ -5,6 +5,7 @@
 #include "pico/binary_info.h"
 #include <stdio.h>
 #include "graphics.h"
+#include "utils.h"
 
 #define DISPLAY_SPI spi1
 #define DISPLAY_CS 29
@@ -14,6 +15,8 @@
 
 #define WIDTH 400
 #define HEIGHT 240
+
+/*** DISPLAY DRIVER ***/
 
 #define BUF_SIZE (WIDTH * HEIGHT / 8)
 
@@ -121,4 +124,10 @@ void display_refresh() {
         }
     }
     toggle_vcom();
+}
+
+/*** GRAPHICS DRIVER ***/
+
+void graphics_draw_line(uvec2_t start, uvec2_t end) {
+
 }
