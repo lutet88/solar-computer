@@ -4,8 +4,10 @@
 #include "pico/stdlib.h"
 #include "pico/binary_info.h"
 #include <stdio.h>
+#include <string.h>
 #include "graphics.h"
 #include "utils.h"
+#include "fonts.h"
 
 #define DISPLAY_SPI spi1
 #define DISPLAY_CS 29
@@ -41,7 +43,7 @@ void toggle_vcom() {
 }
 
 void display_init() {
-    spi_init(DISPLAY_SPI, 1000000);
+    spi_init(DISPLAY_SPI, 2000000);
     spi_set_format(DISPLAY_SPI, 8, SPI_CPOL_0, SPI_CPHA_0, SPI_LSB_FIRST);
 
     gpio_set_function(DISPLAY_MOSI, GPIO_FUNC_SPI);
@@ -128,6 +130,31 @@ void display_refresh() {
 
 /*** GRAPHICS DRIVER ***/
 
-void graphics_draw_line(uvec2_t start, uvec2_t end) {
+void graphics_draw_line(uvec2_t start, uvec2_t end){
 
+}
+
+void graphics_draw_char(uvec2_t pos, uint8_t c, font_t* font, bool level) {
+    const uint8_t* bitmap = font->font + ((font->width + 7) / 8) * font->height * c;
+    for (uint y = 0; y < font->height; ++y) {
+        uint8_t temp = 0;
+        for (uint x = 0; x < font->width + 1; ++x) {
+            if (x % 8 == 0) temp = *(bitmap + y * ((font->width + 7) / 8) + (font->width / 8) - (x / 8));
+            bool e = temp & 1;
+            display_set_pixel(x + pos.x, y + pos.y, level == e);
+            temp >>= 1;
+        }
+    }
+}
+
+void graphics_draw_text(uvec2_t pos, char str[], font_t* font, bool level) {
+    uvec2_t temp = pos;
+    for (uint i = 0; i < strlen(str); ++i) {
+        graphics_draw_char(temp, str[i], font, level);
+        temp.x += font->width;
+    }
+}
+
+font_t* graphics_get_font(uint8_t height, bool bold, bool italic) {
+    return fonts_get_font(height, bold, italic);
 }

@@ -1,6 +1,7 @@
 #ifndef INCLUDE_UTILS_H
 
 #define INCLUDE_UTILS_H
+#include <stdint.h>
 
 typedef struct UVec2 {
     uint16_t x;

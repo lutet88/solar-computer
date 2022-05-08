@@ -49,7 +49,7 @@ for header in headers:
         plt.imshow(char_data)
 
         font_chars.append(char_data)
-    plt.show()
+    # plt.show()
 
     i = 0
     font_widths = [width]
@@ -95,24 +95,24 @@ for header in headers:
     f.write(f"{format(font_widths[i] + 1, '#004x')},")
     for w in range(byte_width - 1):
         f.write("0x00,")
-    f.write("}\n")
+    f.write("},\n")
 
     f.write("\t\t{")
     f.write(f"{format(font_heights[i], '#004x')},")
     for w in range(byte_width - 1):
         f.write("0x00,")
-    f.write("}\n")
+    f.write("},\n")
 
 
     for y in range(font_heights[i] - 2):
         f.write("\t\t{")
         for w in range(byte_width):
             f.write("0x00,")
-        f.write("}\n")
+        f.write("},\n")
 
     f.write("\t}\n")
 
-    f.write("}\n")
+    f.write("};\n")
     f.write("#endif\n")
 
     f.close()
