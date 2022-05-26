@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD 17)
 pico_sdk_init()
 
 add_executable(firmware
-    main.c graphics.c fonts.c
+    main.c graphics.c fonts.c keyboard.c
 )
 
 pico_enable_stdio_usb(firmware 1)

@@ -66,7 +66,7 @@ print = do_nothing
 def parse_value(value, release=False):
     global current_layer, currently_pressed, uart
 
-    if release:
+    if value < 1000 and release:
         uart.write(chr(0x20).encode('latin'))
         print("rel ")
     print(value)
@@ -75,7 +75,7 @@ def parse_value(value, release=False):
         value = ord(value)
 
 
-    if value > 1000:
+    if value >= 1000:
         if release:
             for tup in currently_pressed:
                 parse_value(keymaps[current_layer][tup[0]][tup[1]], True)
