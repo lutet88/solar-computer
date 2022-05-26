@@ -25,4 +25,7 @@ typedef struct Vec3 {
     float z;
 } vec3_t;
 
+uvec2_t uvec2_add(uvec2_t a, uvec2_t b);
+
+
 #endif /* INCLUDE_UTILS_H */

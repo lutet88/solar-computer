@@ -3,11 +3,12 @@
 #define INCLUDE_GRAPHICS_H
 #include "utils.h"
 #include "fonts.h"
+#include <stdint.h>
 
 
 void display_init();
-void display_set_pixel(uint x, uint y, bool enabled);
-bool display_get_pixel(uint x, uint y);
+void display_set_pixel(int x, int y, bool enabled);
+bool display_get_pixel(int x, int y);
 void display_clear();
 void display_refresh();
 void display_hardware_clear();

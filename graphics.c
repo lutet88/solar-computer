@@ -60,7 +60,7 @@ void display_init() {
     display_clear();
 }
 
-void display_set_pixel(uint x, uint y, bool enabled) {
+void display_set_pixel(int x, int y, bool enabled) {
     if (x >= WIDTH || y >= HEIGHT) return;
     uint index = y * WIDTH + x;
     if (enabled) {
@@ -71,7 +71,7 @@ void display_set_pixel(uint x, uint y, bool enabled) {
     changed[y] = true;
 }
 
-bool display_get_pixel(uint x, uint y) {
+bool display_get_pixel(int x, int y) {
     uint index = y * WIDTH + x;
     uint8_t val = buffer[index / 8];
     val >>= index % 8;
